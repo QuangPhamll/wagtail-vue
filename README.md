@@ -2,7 +2,6 @@
 The initial environment of full-stack local dev web app with wagtail and vue. 
 A demo to show how to use .vue files inside django app 
 Bref: change setting of vue.config.js for exporting output files to the directory where django collect the static file by python manage.py collectstatic
-wagtail, vue, vue cli, django, wagtail internationalisation
 ## Build with:
 ```
 - django: v.3
@@ -21,13 +20,10 @@ docker-compose build
 ```
 docker-compose up
 ```
-backend cms:
+App run on:
 ```
-http://localhost:7999/admin
+http://localhost:8000/
+http://localhost:8000/admin
 user: admin
 password: changeme
-```
-frontend:
-```
-http://localhost:8000
 ```
