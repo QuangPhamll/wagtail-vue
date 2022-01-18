@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static i18n wagtailcore_tags %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block extra_css %}
+    {{ block.super }}
+{% endblock extra_css %}
+
+{% block content %}
+<div class="container-fluid">
+    <a href="/{{ page.locale.language_code }}"><h1>{{ page.title }}</h1></a>
+
+    {% for child in page.get_children %}
+        <div>
+            <a href="{% pageurl child.localized %}" rel="alternate" hreflang="{{ language_code }}">
+                {{ child.title }}
+            </a>
+        </div>
+    {% endfor %}
+
+    <todo-item
+        msg= '{% trans "Vue component Hello world" %}'
+    ></todo-item>
+</div>
+{% endblock content %}

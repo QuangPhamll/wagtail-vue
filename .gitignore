@@ -1,0 +1,17 @@
+.DS_Store
+*.pyc
+*.log
+*.swp
+*.retry
+.env
+*~
+/logs
+/data
+.~*
+common/CACHE
+/collectstatic
+media/*
+__pycache__
+!.gitignore
+vue_app/static
+.idea

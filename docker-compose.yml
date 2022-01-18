@@ -1,0 +1,62 @@
+version: '3.4'
+
+volumes:
+  harbin_data_media: {}
+  postgres_data: {}
+  postgres_run: {}
+
+services:
+  postgres:
+    image: "postgres:11"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - postgres_run:/run/postgresql
+    environment:
+      - POSTGRES_USER=postgresuser
+      - POSTGRES_PASSWORD=7n933WIXZvzvDHEO
+    ports:
+      - "5432:5432"
+
+  redis:
+    restart: always
+    image: redis:3.0
+    expose:
+      - "6379"
+
+  elasticsearch:
+    image: elasticsearch:5.4
+    restart: always
+    expose:
+      - "9200"
+
+  wagtail:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    volumes:
+      - .:/app
+      - postgres_run:/run/postgresql
+    environment:
+      - CACHE_URL=redis://redis
+      - DATABASE_URL=postgresql://postgresuser@/postgresuser
+      - ELASTICSEARCH_ENDPOINT=elasticsearch
+    links:
+      - redis:redis
+      - elasticsearch:elasticsearch
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+      - elasticsearch
+      - vue
+    command: ["./wait-for-it.sh", "postgres:5342", "--", "./docker-entrypoint.sh"]
+
+  vue:
+    build:
+      context: ./vue_app/
+      dockerfile: Dockerfile-dev
+    volumes:
+      - './vue_app:/app'
+      - '/app/node_modules'
+    ports:
+      - '8080:8080'
