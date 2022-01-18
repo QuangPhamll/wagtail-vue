@@ -1,7 +1,7 @@
 ## Wagtail - Vue:
-The initial environment of full-stack local dev web app with wagtail and vue. 
-A demo to show how to use .vue files inside django app 
-Bref: change setting of vue.config.js for exporting output files to the directory where django collect the static file by python manage.py collectstatic
+The initial environment of full-stack local dev web app with wagtail and vue.
+A demo to show how to use .vue files inside django app.
+(bref: change setting of vue.config.js for exporting output files to the directory where django collect the static file)
 ## Build with:
 ```
 - django: v.3
